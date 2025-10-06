@@ -29,7 +29,7 @@ public class Movie {
     private String title;
     private String description;
     private LocalDate releaseDate;
-    private double averageRating;
+    private Double averageRating;
     
     @ManyToMany
     @Default

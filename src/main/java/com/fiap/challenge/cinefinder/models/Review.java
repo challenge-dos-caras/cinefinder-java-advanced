@@ -20,7 +20,7 @@ public class Review {
 
     private User user;
     private Movie movie;
-    private int rating;
+    private Double rating;
     private String comment;
 
 }
