@@ -15,9 +15,29 @@ public class GenreService {
     @Autowired
     private GenreRepo repo;
 
-    public Page<Genre> getGenres(Specification<Genre> specs, Pageable pageable) {
+    public Page<Genre> getAll(Specification<Genre> specs, Pageable pageable) {
         return repo.findAll(specs, pageable);
     }
 
-    
+    public Genre geById(Long id) {
+        return getGenreById(id);
+    }
+
+    public void create(Genre genre) {
+        repo.save(genre);
+    }
+
+    public Genre updateById(Long id, Genre updGenre) {
+        updGenre.setId(getGenreById(id).getId());
+        return repo.save(updGenre);
+    }
+
+    public void deleteById(Long id) {
+        repo.delete(getGenreById(id));
+    }
+
+    private Genre getGenreById(Long id) {
+        return repo.findById(id).orElseThrow();
+    }
+
 }

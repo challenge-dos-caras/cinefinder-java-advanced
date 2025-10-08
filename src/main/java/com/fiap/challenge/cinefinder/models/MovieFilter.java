@@ -8,8 +8,8 @@ public record MovieFilter(
     String description,
     LocalDate starDate,
     LocalDate endDate,
-    Double maxRating,
     Double minRating,
+    Double maxRating,
     List<Long> genresIds
 ) {
     
