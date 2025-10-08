@@ -16,43 +16,43 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fiap.challenge.cinefinder.filters.Specifications;
-import com.fiap.challenge.cinefinder.models.Genre;
-import com.fiap.challenge.cinefinder.models.GenreFilter;
-import com.fiap.challenge.cinefinder.services.GenreService;
+import com.fiap.challenge.cinefinder.models.Movie;
+import com.fiap.challenge.cinefinder.models.MovieFilter;
+import com.fiap.challenge.cinefinder.services.MovieService;
 
 @RestController
-@RequestMapping("genres")
-public class GenreController {
+@RequestMapping("movies")
+public class MovieController {
     
     @Autowired
-    private GenreService service;
+    private MovieService service;
 
     @GetMapping
-    public Page<Genre> getAllGenres(GenreFilter filters, @PageableDefault(size = 15) Pageable pageable) {
-        var specs = Specifications.buildGenreSpecification(filters);
+    public Page<Movie> getAllMovies(MovieFilter filters, @PageableDefault(size = 15) Pageable pageable) {
+        var specs = Specifications.buildMovieSpecification(filters);
         return service.getAll(specs, pageable);
     }
 
 
     @GetMapping("{id}")
-    public Genre getGenreById(@PathVariable Long id) {
+    public Movie getMovieById(@PathVariable Long id) {
         return service.geById(id);
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void createGenre(@RequestBody Genre genre) {
-        service.create(genre);
+    public void createMovie(@RequestBody Movie Movie) {
+        service.create(Movie);
     }
 
     @PutMapping("{id}")
-    public Genre updateGenre(@PathVariable Long id, @RequestBody Genre updGenre) {
-        return service.updateById(id, updGenre);
+    public Movie updateMovie(@PathVariable Long id, @RequestBody Movie updMovie) {
+        return service.updateById(id, updMovie);
     }
 
     @DeleteMapping("{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT )
-    public void deleteGenre(@PathVariable Long id) {
+    public void deleteMovie(@PathVariable Long id) {
         service.deleteById(id);
     }
 }

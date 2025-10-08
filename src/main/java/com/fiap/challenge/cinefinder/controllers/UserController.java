@@ -16,43 +16,43 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fiap.challenge.cinefinder.filters.Specifications;
-import com.fiap.challenge.cinefinder.models.Genre;
-import com.fiap.challenge.cinefinder.models.GenreFilter;
-import com.fiap.challenge.cinefinder.services.GenreService;
+import com.fiap.challenge.cinefinder.models.User;
+import com.fiap.challenge.cinefinder.models.UserFilter;
+import com.fiap.challenge.cinefinder.services.UserService;
 
 @RestController
-@RequestMapping("genres")
-public class GenreController {
+@RequestMapping("users")
+public class UserController {
     
     @Autowired
-    private GenreService service;
+    private UserService service;
 
     @GetMapping
-    public Page<Genre> getAllGenres(GenreFilter filters, @PageableDefault(size = 15) Pageable pageable) {
-        var specs = Specifications.buildGenreSpecification(filters);
+    public Page<User> getAllUsers(UserFilter filters, @PageableDefault(size = 15) Pageable pageable) {
+        var specs = Specifications.buildUserSpecification(filters);
         return service.getAll(specs, pageable);
     }
 
 
     @GetMapping("{id}")
-    public Genre getGenreById(@PathVariable Long id) {
+    public User getUserById(@PathVariable Long id) {
         return service.geById(id);
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void createGenre(@RequestBody Genre genre) {
-        service.create(genre);
+    public void createUser(@RequestBody User User) {
+        service.create(User);
     }
 
     @PutMapping("{id}")
-    public Genre updateGenre(@PathVariable Long id, @RequestBody Genre updGenre) {
-        return service.updateById(id, updGenre);
+    public User updateUser(@PathVariable Long id, @RequestBody User updUser) {
+        return service.updateById(id, updUser);
     }
 
     @DeleteMapping("{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT )
-    public void deleteGenre(@PathVariable Long id) {
+    public void deleteUser(@PathVariable Long id) {
         service.deleteById(id);
     }
 }

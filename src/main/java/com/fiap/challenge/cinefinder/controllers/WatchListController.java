@@ -16,43 +16,43 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fiap.challenge.cinefinder.filters.Specifications;
-import com.fiap.challenge.cinefinder.models.Genre;
-import com.fiap.challenge.cinefinder.models.GenreFilter;
-import com.fiap.challenge.cinefinder.services.GenreService;
+import com.fiap.challenge.cinefinder.models.WatchList;
+import com.fiap.challenge.cinefinder.models.WatchListFilter;
+import com.fiap.challenge.cinefinder.services.WatchListService;
 
 @RestController
-@RequestMapping("genres")
-public class GenreController {
+@RequestMapping("watch-lists")
+public class WatchListController {
     
     @Autowired
-    private GenreService service;
+    private WatchListService service;
 
     @GetMapping
-    public Page<Genre> getAllGenres(GenreFilter filters, @PageableDefault(size = 15) Pageable pageable) {
-        var specs = Specifications.buildGenreSpecification(filters);
+    public Page<WatchList> getAllWatchLists(WatchListFilter filters, @PageableDefault(size = 15) Pageable pageable) {
+        var specs = Specifications.buildWatchListSpecification(filters);
         return service.getAll(specs, pageable);
     }
 
 
     @GetMapping("{id}")
-    public Genre getGenreById(@PathVariable Long id) {
+    public WatchList getWatchListById(@PathVariable Long id) {
         return service.geById(id);
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void createGenre(@RequestBody Genre genre) {
-        service.create(genre);
+    public void createWatchList(@RequestBody WatchList WatchList) {
+        service.create(WatchList);
     }
 
     @PutMapping("{id}")
-    public Genre updateGenre(@PathVariable Long id, @RequestBody Genre updGenre) {
-        return service.updateById(id, updGenre);
+    public WatchList updateWatchList(@PathVariable Long id, @RequestBody WatchList updWatchList) {
+        return service.updateById(id, updWatchList);
     }
 
     @DeleteMapping("{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT )
-    public void deleteGenre(@PathVariable Long id) {
+    public void deleteWatchList(@PathVariable Long id) {
         service.deleteById(id);
     }
 }
