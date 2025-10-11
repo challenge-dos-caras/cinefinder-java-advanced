@@ -78,7 +78,7 @@ public class Specifications {
                 predicates = cb.and(predicates, predicateMaxRating);
             }
 
-            if (filter.genresIds() != null || !filter.genresIds().isEmpty()) {
+            if (filter.genresIds() != null && !filter.genresIds().isEmpty()) {
                 var predicateGenres = root.join("genres").get("id").in(filter.genresIds());
                 predicates = cb.and(predicates, predicateGenres);
 
@@ -168,7 +168,7 @@ public class Specifications {
             }
 
             
-            if (filter.moviesIds() != null || !filter.moviesIds().isEmpty()) {
+            if (filter.moviesIds() != null && !filter.moviesIds().isEmpty()) {
                 var predicateMovies = root.join("movies").get("id").in(filter.moviesIds());
                 predicates = cb.and(predicates, predicateMovies);
 
