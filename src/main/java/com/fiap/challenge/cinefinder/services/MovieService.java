@@ -40,6 +40,7 @@ public class MovieService {
     }
 
     public void deleteById(Long id) {
+        log.info("deletando filme pelo id: {}", id);
         repo.delete(getMovieById(id));
     }
 

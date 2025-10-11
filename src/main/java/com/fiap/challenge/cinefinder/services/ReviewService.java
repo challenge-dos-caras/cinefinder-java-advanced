@@ -9,22 +9,28 @@ import org.springframework.stereotype.Service;
 import com.fiap.challenge.cinefinder.models.Review;
 import com.fiap.challenge.cinefinder.repositories.ReviewRepo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class ReviewService {
 
     @Autowired
     private ReviewRepo repo;
 
     public Page<Review> getAll(Specification<Review> specs, Pageable pageable) {
+        log.info("recuperando filmes");
         return repo.findAll(specs, pageable);
     }
 
     public Review geById(Long id) {
+        log.info("recuperando avaliacoes pelo id: {}", id);
         return getReviewById(id);
     }
 
-    public void create(Review genre) {
-        repo.save(genre);
+    public void create(Review review) {
+        log.info("adicionando avaliacao: {}", review);
+        repo.save(review);
     }
 
     public Review updateById(Long id, Review updReview) {
